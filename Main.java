@@ -1,12 +1,14 @@
 import entity.Deliveries;
 import entity.Matches;
 
+import java.util.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+import static java.lang.Integer.parseInt;
+
 public class Main {
     public static void main(String[] args) throws IOException {
         ArrayList<Matches> listOfMatches = new ArrayList<>();
@@ -94,6 +96,25 @@ public class Main {
             listOfDeliveries.add(deliveries);
         }
         sc.close();
+
+        int n1 = listOfMatches.size();
+        int n2 = listOfDeliveries.size();
+
+        TreeMap<String, Integer> map = new TreeMap<>();
+        for(int i=1; i<n1;i++){
+            String year = listOfMatches.get(i).getSeason();
+            if(map.containsKey(year)){
+                int of = map.get(year);
+                int nf = of +1;
+                map.put(year, nf);
+            }
+            else{
+                map.put(year,1);
+            }
+        }
+
+        System.out.println(map);
+
 
 
 

@@ -115,9 +115,23 @@ public class Main {
 
         System.out.println(map);
 
+        TreeMap<String, Integer> map1 = new TreeMap<>();
+        for(int i=1; i<n1;i++){
+            String team = listOfMatches.get(i).getWinner();
+            if(team.equals("")){
+                team = team + "no result";
+            }
+            if(map1.containsKey(team)){
+                int of = map1.get(team);
+                int nf = of +1;
+                map1.put(team, nf);
+            }
+            else{
+                map1.put(team, 1);
+            }
 
+        }
 
-
-
+        System.out.println(map1);
     }
 }

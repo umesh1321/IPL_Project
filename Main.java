@@ -136,19 +136,25 @@ public class Main {
 
         TreeMap<String, Integer> map2 = new TreeMap<>();
         for(int i=1; i<n2;i++){
-            String team = listOfDeliveries.get(i).getBowling_team();
-            int extraRuns = Integer.parseInt(listOfDeliveries.get(i).getExtra_runs());
+            int id = Integer.parseInt(listOfDeliveries.get(i).getMatch_id());
+            if(id>=577 && id<=636) {
+                String team = listOfDeliveries.get(i).getBowling_team();
+                int extraRuns = Integer.parseInt(listOfDeliveries.get(i).getExtra_runs());
 
-            if(map2.containsKey(team)){
-                int of = map2.get(team);
-                int nf = of + extraRuns;
-                map2.put(team,nf);
-            }
-            else{
-                map2.put(team,extraRuns);
+                if (map2.containsKey(team)) {
+                    int of = map2.get(team);
+                    int nf = of + extraRuns;
+                    map2.put(team, nf);
+                } else {
+                    map2.put(team, extraRuns);
+                }
             }
         }
         System.out.println(map2);
+
+
+
+
 
 
     }

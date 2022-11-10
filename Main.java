@@ -152,6 +152,67 @@ public class Main {
         }
         System.out.println(map2);
 
+        ArrayList<String> bowler = new ArrayList<>();
+        ArrayList<Float> balls = new ArrayList<>();
+        ArrayList<Float> totalRuns = new ArrayList<>();
+
+        TreeMap<String, Integer> map3 = new TreeMap<>();//bowler,balls
+        TreeMap<String, Float> map4 = new TreeMap<>();//boeler,total runs
+        for(int i=1; i<n2;i++){
+            int id = Integer.parseInt(listOfDeliveries.get(i).getMatch_id());
+            if(id>=518 && id<=576){
+               String bow = listOfDeliveries.get(i).getBowler();
+               int ball = Integer.parseInt(listOfDeliveries.get(i).getBall());
+
+               if(map3.containsKey(bow)){
+                   int of = map3.get(bow);
+                   int nf = of + 1;
+                   map3.put(bow, nf);
+               }
+               else{
+                   map3.put(bow, 1);
+               }
+            }
+        }
+        ArrayList<String> listOfkeys=new ArrayList<>();
+
+        for(int i=1; i<n2;i++){
+            int id = Integer.parseInt(listOfDeliveries.get(i).getMatch_id());
+            if(id>=518 && id<=576){
+                String bow = listOfDeliveries.get(i).getBowler();
+                float totRuns = Float.parseFloat(listOfDeliveries.get(i).getTotal_runs());
+                if(map4.containsKey(bow)){
+                    float of = map4.get(bow);
+                    float nf = of + Float.parseFloat(listOfDeliveries.get(i).getTotal_runs());
+                    map4.put(bow, nf);
+                }
+                else{
+                    map4.put(bow, Float.parseFloat(listOfDeliveries.get(i).getTotal_runs()));
+                    listOfkeys.add(bow);
+                }
+            }
+        }
+        TreeMap<String,String> map5=new TreeMap<>();
+        listOfkeys.forEach(key->{
+            int map3Value = map3.get(key);
+            float over = (float)(map3Value/6) + ((float)(map3Value %6))/6 ;
+            float map4Value = (float) map4.get(key);
+            Double economy =(double) map4Value/over;
+
+
+            map5.put(key, String.format("%.2f",economy));
+
+        });
+
+        System.out.println(map5);
+
+
+
+
+
+
+
+
 
 
 

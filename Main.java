@@ -14,6 +14,7 @@ public class Main {
         ArrayList<Matches> listOfMatches = new ArrayList<>();
         ArrayList<Deliveries> listOfDeliveries = new ArrayList<>();
 
+        //Reading File matches.csv
         BufferedReader sc = new BufferedReader(new FileReader("/home/umesh/IdeaProjects/IPL/Data/matches.csv"));
         String line="";
         String splitBy=",";
@@ -54,7 +55,7 @@ public class Main {
         sc.close();
 
 
-
+        //Reading file deliveries.csv
         sc = new BufferedReader(new FileReader("/home/umesh/IdeaProjects/IPL/Data/deliveries.csv"));
         String line1="";
         String splitBy1=",";
@@ -100,6 +101,7 @@ public class Main {
         int n1 = listOfMatches.size();
         int n2 = listOfDeliveries.size();
 
+        //Number of matches played per year of all the years in IPL
         TreeMap<String, Integer> map = new TreeMap<>();
         for(int i=1; i<n1;i++){
             String year = listOfMatches.get(i).getSeason();
@@ -115,6 +117,8 @@ public class Main {
 
         System.out.println(map);
 
+
+        //Number of matches won of all teams over all the years of IPL
         TreeMap<String, Integer> map1 = new TreeMap<>();
         for(int i=1; i<n1;i++){
             String team = listOfMatches.get(i).getWinner();
@@ -134,6 +138,8 @@ public class Main {
 
         System.out.println(map1);
 
+
+        //For the year 2016 get the extra runs conceded per team.
         TreeMap<String, Integer> map2 = new TreeMap<>();
         for(int i=1; i<n2;i++){
             int id = Integer.parseInt(listOfDeliveries.get(i).getMatch_id());
@@ -152,6 +158,8 @@ public class Main {
         }
         System.out.println(map2);
 
+
+        //For the year 2015 get the top economical bowlers.
         ArrayList<String> bowler = new ArrayList<>();
         ArrayList<Float> balls = new ArrayList<>();
         ArrayList<Float> totalRuns = new ArrayList<>();
@@ -204,13 +212,12 @@ public class Main {
             map5.put(key, String.format("%.2f",economy));
 
         });
-        System.out.println(map5);
 
 
-        // Create a list from elements of HashMap
+        // sort map5 according to values.
         List<Map.Entry<String, String> > list =  new LinkedList<Map.Entry<String, String> >(map5.entrySet());
 
-        // Sort the list
+
         Collections.sort(list, new Comparator<Map.Entry<String, String> >() {
             public int compare(Map.Entry<String, String> o1,
                                Map.Entry<String, String> o2)
@@ -229,6 +236,35 @@ public class Main {
         }
 
         System.out.println(map6);
+
+
+        //in year 2008, list the teams that win the toss and the match as ell and count such events also.
+       List<String> list1 = new ArrayList<>();
+        for(int i=1; i<n1;i++) {
+            int id = Integer.parseInt(listOfMatches.get(i).getId());
+            if (id >= 60 && id <= 117) {
+                String s1 = listOfMatches.get(i).getToss_winner();
+                String s2 = listOfMatches.get(i).getWinner();
+                if (s1.equals(s2)) {
+                    list1.add(s1);
+                }
+            }
+        }
+
+        TreeMap<String, Integer> map7 = new TreeMap<>();
+        for(int i=0; i<list1.size();i++){
+            String str = list1.get(i);
+            if(map7.containsKey(str)){
+                int of = map7.get(str);
+                int nf = of + 1;
+                map7.put(str, nf);
+            }
+            else{
+                map7.put(str,1);
+            }
+        }
+
+        System.out.println(map7);
 
 
 

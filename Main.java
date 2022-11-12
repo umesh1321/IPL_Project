@@ -192,7 +192,7 @@ public class Main {
                 }
             }
         }
-        TreeMap<String,String> map5=new TreeMap<>();
+        HashMap<String,String> map5=new HashMap<>();
         listOfkeys.forEach(key->{
             int map3Value = map3.get(key);
             float over = (float)(map3Value/6) + ((float)(map3Value %6))/6 ;
@@ -204,8 +204,35 @@ public class Main {
             map5.put(key, String.format("%.2f",economy));
 
         });
-
         System.out.println(map5);
+
+
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, String> > list =  new LinkedList<Map.Entry<String, String> >(map5.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<String, String> >() {
+            public int compare(Map.Entry<String, String> o1,
+                               Map.Entry<String, String> o2)
+            {
+                Float f1 = Float.parseFloat(o1.getValue());
+                Float f2 = Float.parseFloat(o2.getValue());
+
+                return f1.compareTo(f2);
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<String, String> map6 = new LinkedHashMap<String, String>();
+        for (Map.Entry<String, String> aa : list) {
+            map6.put(aa.getKey(), aa.getValue());
+        }
+
+        System.out.println(map6);
+
+
+
+
 
 
 

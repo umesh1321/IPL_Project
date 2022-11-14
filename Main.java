@@ -160,12 +160,9 @@ public class Main {
 
 
         //For the year 2015 get the top economical bowlers.
-        ArrayList<String> bowler = new ArrayList<>();
-        ArrayList<Float> balls = new ArrayList<>();
-        ArrayList<Float> totalRuns = new ArrayList<>();
 
         TreeMap<String, Integer> map3 = new TreeMap<>();//bowler,balls
-        TreeMap<String, Float> map4 = new TreeMap<>();//boeler,total runs
+        TreeMap<String, Float> map4 = new TreeMap<>();//bowler,total runs
         for(int i=1; i<n2;i++){
             int id = Integer.parseInt(listOfDeliveries.get(i).getMatch_id());
             if(id>=518 && id<=576){
@@ -216,7 +213,6 @@ public class Main {
 
         // sort map5 according to values.
         List<Map.Entry<String, String> > list =  new LinkedList<Map.Entry<String, String> >(map5.entrySet());
-
 
         Collections.sort(list, new Comparator<Map.Entry<String, String> >() {
             public int compare(Map.Entry<String, String> o1,
